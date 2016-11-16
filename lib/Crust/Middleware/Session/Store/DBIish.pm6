@@ -86,6 +86,33 @@ will be stored.
 
 Table name that will store session data (defaults to "sessions").
 
+=head1 DATABASE
+
+The database table is called "sessions" by default. This table needs
+at least 2 columns, named "id" and "session_data".
+
+The C<id> column is the SHA key used as sessions identifiers by
+Crust::Middleware::Sessions, and the C<session_data> column is should
+be big enough to hold as much session data as you think you might
+need.
+
+The one I just created for sessions was done as follows, and includes
+a column of "created" which contains the time that particular session
+was created (for later database purging).
+
+    =begin code :skip-test
+    $dbh.do(qq:to/SQL/);
+    CREATE TABLE IF NOT EXISTS sessions (
+        id TEXT PRIMARY KEY,
+        session_data text,
+        created timestamp with time zone not null default now()
+    )
+    SQL
+    =end code
+
+You probably should probably make your "id" column unique, as happens
+with Postgresql's PRIMARY KEY attribute.
+
 =head1 AUTHOR
 
 Mark Rushing <mark@orbislumen.net>

@@ -92,7 +92,7 @@ The database table is called "sessions" by default. This table needs
 at least 2 columns, named "id" and "session_data".
 
 The C<id> column is the SHA key used as sessions identifiers by
-Crust::Middleware::Sessions, and the C<session_data> column is should
+Crust::Middleware::Sessions, and the C<session_data> column should
 be big enough to hold as much session data as you think you might
 need.
 

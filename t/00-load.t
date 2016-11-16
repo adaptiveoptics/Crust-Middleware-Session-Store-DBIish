@@ -5,6 +5,6 @@ use lib 'lib';
 plan 3;
 
 use-ok 'Crust::Builder', 'load dependency Crust::Builder';
-use-ok 'Crust::Middlewear::Session', 'load dependency Crust::Builder::Session';
-use-ok 'Crust::Middlewear::Session::Store::DBIish', 'load module Crust::Middlewear::Session::Store::DBIish';
+use-ok 'Crust::Middleware::Session', 'load dependency Crust::Middleware::Session';
+use-ok 'Crust::Middleware::Session::Store::DBIish', 'load module Crust::Middleware::Session::Store::DBIish';
 

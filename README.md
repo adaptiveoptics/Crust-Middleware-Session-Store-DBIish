@@ -2,6 +2,8 @@
 
 Crust::Middleware::Session::Store::DBIish - Implements database storage role for Crust::Middleware::Session
 
+[![Build Status](https://travis-ci.org/gfldex/Crust-Middleware-Session-Store-DBIish.svg?branch=master)](https://travis-ci.org/gfldex/Crust-Middleware-Session-Store-DBIish)
+
 # SYNOPSIS
 
     use Crust::Builder;

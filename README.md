@@ -5,8 +5,8 @@ Crust::Middleware::Session::Store::DBIish - Implements database storage role for
 # SYNOPSIS
 
     use Crust::Builder;
-    use Crust::Middlewear::Session;
-    use Crust::Middlewear::Session::Store::DBIish;
+    use Crust::Middleware::Session;
+    use Crust::Middleware::Session::Store::DBIish;
 
     sub app($env) {
 	$env<p6sgix.session>.get('username').say if $env<p6sgix.session>.defined;
@@ -18,20 +18,20 @@ Crust::Middleware::Session::Store::DBIish - Implements database storage role for
     my $store   = Crust::Middleware::Session::Store::DBIish.new(:dbh($dbh));
     my $builder = Crust::Builder.new;
     
-    $builder.add-middlewear('Session', store => $store);
+    $builder.add-middleware('Session', store => $store);
     $builder.wrap(&app);
 
 # DESCRIPTION
     
-Crust::Middlewear::Session::Store::DBIish implements a backend storage
-role for Crust::Middlewear::Session in any database supported by
+Crust::Middleware::Session::Store::DBIish implements a backend storage
+role for Crust::Middleware::Session in any database supported by
 DBIish.
 
 You must pass in a database handle to `new()`.
 
 Session data is stored serialized in the database table as JSON and is
 de-serialized from JSON on get, and made available via the normal
-Crust::Middlewear::Session methods.
+Crust::Middleware::Session methods.
 
 The very fast and compact JSON::Fast is used to serialize and
 de-serialize the session data to the database table.

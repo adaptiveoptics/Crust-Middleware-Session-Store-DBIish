@@ -4,35 +4,37 @@ use JSON::Fast;
 
 class Crust::Middleware::Session::Store::DBIish does Crust::Middleware::Session::StoreRole
 {
-    has $.dbh   is required;
-    has $.table = 'sessions';
+    has $.dbh is required;
+
+    has $.table         = 'sessions';
+    has $.sessid-column = 'id';
 
     method get($cookie-name) {
-	my $sth = $.dbh.prepare("SELECT session_data FROM $.table WHERE id = ?");
+	my $sth = $.dbh.prepare("SELECT session_data FROM $.table WHERE {$.sessid-column} = ?");
 	$sth.execute($cookie-name);
 	my @row = $sth.row;
 	return @row.elems ?? from-json(@row[0]) !! ();
     }
 
     method set($cookie-name, $session) {
-	my $sth = $.dbh.prepare("SELECT 1 FROM $.table WHERE id = ?");
+	my $sth = $.dbh.prepare("SELECT 1 FROM $.table WHERE {$.sessid-column} = ?");
 	$sth.execute($cookie-name);
 	
 	if ($sth.row.elems) {
-	    $sth = $.dbh.prepare("UPDATE $.table SET session_data = ? WHERE id = ?");
+	    $sth = $.dbh.prepare("UPDATE $.table SET session_data = ? WHERE {$.sessid-column} = ?");
 	    $sth.execute(to-json($session), $cookie-name);
 	} else {
-	    $sth = $.dbh.prepare("INSERT INTO $.table (id, session_data) VALUES (?, ?)");
+	    $sth = $.dbh.prepare("INSERT INTO $.table ({$.sessid-column}, session_data) VALUES (?, ?)");
 	    $sth.execute($cookie-name, to-json($session));
 	}
     }
 
     method remove($cookie-name) {
-	my $sth = $.dbh.prepare("DELETE from $.table WHERE id = ?");
+	my $sth = $.dbh.prepare("DELETE from $.table WHERE {$.sessid-column} = ?");
 	$sth.execute($cookie-name);
     }
 }
-
+#|{
 =begin pod
 
 =TITLE class Crust::Middleware::Session::Store::DBIish
@@ -86,6 +88,13 @@ will be stored.
 
 Table name that will store session data (defaults to "sessions").
 
+=head2 sessid-column
+
+By default the "id" database column is used for cookie session id
+searches and updates. You can change the column name used to identify
+session ids with sessid-column in case your 'id' column is used for
+something else.
+
 =head1 DATABASE
 
 The database table is called "sessions" by default. This table needs
@@ -123,3 +132,4 @@ This is free software; you can redistribute it and/or modify it under
 the Artistic License 2.0.
 
 =end pod
+}

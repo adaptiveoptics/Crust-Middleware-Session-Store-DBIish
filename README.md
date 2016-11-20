@@ -49,6 +49,13 @@ will be stored.
 
 Table name that will store session data (defaults to "sessions").
 
+## sessid-column
+
+By default the "id" database column is used for cookie session id
+searches and updates. You can change the column name used to identify
+session ids with sessid-column in case your 'id' column is used for
+something else.
+
 # DATABASE
 
 The database table is called "sessions" by default. This table needs

@@ -12,10 +12,10 @@ Crust::Middleware::Session::Store::DBIish - Implements database storage role for
     use Crust::Middleware::Session::Store::DBIish;
 
     sub app($env) {
-	$env<p6sgix.session>.get('username').say if $env<p6sgix.session>.defined;
-	$env<p6sgix.session>.set('username', 'ima-username');
+        $env<p6sgix.session>.get('username').say if $env<p6sgix.session>.defined;
+        $env<p6sgix.session>.set('username', 'ima-username');
 
-	# ...crust-y stuff...
+        # ...crust-y stuff...
     }
 
     my $store   = Crust::Middleware::Session::Store::DBIish.new(:dbh($dbh));

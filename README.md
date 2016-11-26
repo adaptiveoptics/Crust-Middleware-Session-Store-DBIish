@@ -6,6 +6,7 @@ Crust::Middleware::Session::Store::DBIish - Implements database storage role for
 
 # SYNOPSIS
 
+```perl
     use Crust::Builder;
     use Crust::Middleware::Session;
     use Crust::Middleware::Session::Store::DBIish;
@@ -22,6 +23,7 @@ Crust::Middleware::Session::Store::DBIish - Implements database storage role for
     
     $builder.add-middleware('Session', store => $store);
     $builder.wrap(&app);
+```
 
 # DESCRIPTION
     

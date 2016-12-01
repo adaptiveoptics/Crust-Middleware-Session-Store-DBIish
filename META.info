@@ -7,6 +7,6 @@
     "provides" : {
 	"Crust::Middleware::Session::Store::DBIish" : "lib/Crust/Middleware/Session/Store/DBIish.pm6"
     },
-    "depends" : [ "Crust::Middleware::Session", "Crust", "JSON::Fast" ],
+    "depends" : [ "Crust::Middleware::Session", "JSON::Fast" ],
     "source-url" : "git://github.com/adaptiveoptics/Crust-Middleware-Session-Store-DBIish.git"
 }
